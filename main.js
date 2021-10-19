@@ -1,70 +1,75 @@
-class person {
-    constructor() {
-        this.name = "Fehmi";
-        this.eyeColor = "Brown";
-        this.hairColor = "Brown";
-    };
-};
+class Person{
+    constructor(name,hairColor,activity){
+        this.name = name
+        this.hairColor = hairColor
+        this.activity = activity
+    }
+    getActivity(){
+    }
+}
 
-const person1 = new person();
+class ChildOne extends Person{
+    constructor(name,hairColor,activity){
+        super(name,hairColor,activity)
+    }
+    getActivity(){
+        return this.activity
+    }
+}
 
-class firstChildFrom1 extends person {
-    constructor() {
-        super()
-        this.name = "Ahmet"
-    };
-};
+class ChildTwo extends Person{
+    constructor(name,hairColor,activity){
+        super(name,hairColor,activity)
+    }
+    getActivity(){
+        return this.activity()
+    }
+}
 
-const person2 = new firstChildFrom1()
+class Father extends Person{
+    constructor(name,hairColor){
+        super(name,hairColor)
+        this.treeMembers = []
+    }
+    addMember(Person){
+        this.treeMembers.push(Person)
+    }
 
-class secondChildFrom1 extends person {
-    constructor() {
-        super()
-        this.name = "Ayşe"
-        this.eyeColor="Green"
-    };
-};
+    removeMember(Person){
+       for(var i=0; i<this.treeMembers.length; i++){
+           if(this.treeMembers[i] == Person){
+               this.treeMembers.splice(i,1)
+           }
+       }
+       return this.treeMembers
+    }
 
-const person3 = new secondChildFrom1()
+    getActivity(){
+         for(var i=0; i<this.treeMembers.length; i++){
+            console.log(this.treeMembers[i].getActivity())
+        }
+    }
+ 
+    showTeam(){
+        for(var i=0; i<this.treeMembers.length; i++){
+            console.log(this.treeMembers[i].name)
+        }
+    }
+}
 
-class firstChildFrom1_1 extends firstChildFrom1 {
-    constructor() {
-        super()
-        this.name = "Vedide"
-    };
-};
-
-const person4 = new firstChildFrom1_1()
-
-class secondChildFrom1_2 extends firstChildFrom1 {
-    constructor() {
-        super()
-        this.name = "Elif"
-    };
-};
-
-const person5 = new secondChildFrom1_2()
-
-class firstChildFrom2_1 extends secondChildFrom1 {
-    constructor() {
-        super()
-        this.name = "Vedide"
-    };
-};
-const person6 = new firstChildFrom2_1()
-class secondChildFrom2_2 extends secondChildFrom1 {
-    constructor() {
-        super()
-        this.name = "Hamza"
-    };
-};
-
-const person7 = new secondChildFrom2_2()
-
-console.log(person1);
-console.log(person2);
-console.log(person3);
-console.log(person4);
-console.log(person5);
-console.log(person6);
-console.log(person7);
+const childOne = new ChildOne("Ali","White Hair","60%")
+const childTwo = new ChildOne("Ata","Brown-haired", "50%")
+const teamLead = new Father("Zeynep", "Red Hair","90%")
+teamLead.addMember(childOne)
+teamLead.addMember(childTwo)
+console.log("Family members list:")
+teamLead.showTeam()
+console.log("Get family members activity:")
+teamLead.getActivity()
+console.log("Removing Rachel from family:")
+teamLead.removeMember(childOne)
+console.log("Updated family members list:")
+teamLead.showTeam()
+const childTree = new ChildOne("Gül", "Blond Hair", "80%")
+console.log("Get personal activity:")
+console.log(childTree.getActivity()) 
