@@ -8,7 +8,7 @@ class Person{
     }
 }
 
-class ChildOne extends Person{
+class Child extends Person{
     constructor(name,hairColor,activity){
         super(name,hairColor,activity)
     }
@@ -17,14 +17,6 @@ class ChildOne extends Person{
     }
 }
 
-class ChildTwo extends Person{
-    constructor(name,hairColor,activity){
-        super(name,hairColor,activity)
-    }
-    getActivity(){
-        return this.activity()
-    }
-}
 
 class Father extends Person{
     constructor(name,hairColor){
@@ -57,8 +49,8 @@ class Father extends Person{
     }
 }
 
-const childOne = new ChildOne("Ali","White Hair","60%")
-const childTwo = new ChildOne("Ata","Brown-haired", "50%")
+const childOne = new Child("Ali","White Hair","60%")
+const childTwo = new Child("Ata","Brown-haired", "50%")
 const teamLead = new Father("Zeynep", "Red Hair","90%")
 teamLead.addMember(childOne)
 teamLead.addMember(childTwo)
@@ -70,6 +62,6 @@ console.log("Removing Rachel from family:")
 teamLead.removeMember(childOne)
 console.log("Updated family members list:")
 teamLead.showTeam()
-const childTree = new ChildOne("Gül", "Blond Hair", "80%")
+const childTree = new Child("Gül", "Blond Hair", "80%")
 console.log("Get personal activity:")
 console.log(childTree.getActivity()) 
